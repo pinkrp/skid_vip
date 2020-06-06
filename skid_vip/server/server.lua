@@ -1,11 +1,3 @@
--- ESSE RESOURCE FOI FEITO COM UM UNICO INTUÍTO DE APRENDIZADO
--- SENDO ASSIM, É PROÍBIDO A VENDA E COMERCIALIZAÇÃO :C
--- VOCÊ TEM TOTAL LIBERDADE PARA MODIFICAR O QUE QUISER, COMPARTILHAR COM QUEM QUISER, SÓ NÃO VENDA <3
--- FOI FEITO COM CARINHO E TÁ COMENTADO NAS PARTES MAIS DIFICIEIS
--- PRECISA ALTERAR AS NOTIFYS POIS ESTÁ CONFIGURADO PARA O MEU
--- ATÉ ONDE FOI TESTADO ESTAVA COMPLETAMENTE FUNCIONAL, QUALQUER BUG, RELATE PARA O DISCORD ABAIXO 
--- DISCORD CRIADOR: @pink_rp#0803
-
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 vRP = Proxy.getInterface("vRP")
@@ -21,7 +13,7 @@ function perm.giveCar(id,carrin) --função de dar carro, com as duas variáveis
 
         vRP.execute("creative/add_vehicle",{ user_id = parseInt(id), vehicle = carrin, ipva = parseInt(os.time()) }) 
         TriggerClientEvent("Notify",source,"Voce adicionou o veículo <b>"..carrin.."</b> para o Passaporte: <b>"..id.."</b>.","Sucesso","Verde") 
-        TriggerClientEvent("Notify",source,"Voce recebeu o veículo <b>"..carrin.."</b>.","Faça bom uso","Verde") 
+        TriggerClientEvent("Notify",nplayer,"Voce recebeu o veículo <b>"..carrin.."</b>.","Faça bom uso","Verde") 
         
     else
         TriggerClientEvent("Notify",source,"Achou que ia ser fácil driblar triggando direto do client né safado ?","HAHAHA","Rosa")
@@ -96,7 +88,7 @@ function perm.remCar(id,carrin)
 
         vRP.execute("creative/rem_vehicle",{ user_id = parseInt(id), vehicle = carrin }) 
         TriggerClientEvent("Notify",source,"Voce removeu o veículo <b>"..carrin.."</b> para o Passaporte: <b>"..id.."</b>.","Sucesso","Verde") 
-        TriggerClientEvent("Notify",source,"Voce perdeu o veículo <b>"..carrin.."</b>.","Se fudeu","Vermelho") 
+        TriggerClientEvent("Notify",nplayer,"Voce perdeu o veículo <b>"..carrin.."</b>.","Se fudeu","Vermelho") 
        
     else
         TriggerClientEvent("Notify",source,"Achou que ia ser fácil driblar triggando direto do client né safado ?","HAHAHA","Rosa")
@@ -126,12 +118,17 @@ function perm.remMoney(id,money)
     local source = source
     local user_id = vRP.getUserId(source)
     local nplayer = vRP.getUserSource(parseInt(id))
+    local dindin = vRP.getBankMoney(parseInt(1))
 
-    if vRP.hasPermission(user_id,"admin.permissao") then
+    if vRP.hasPermission(user_id,"admin.permissao") then 
 
-        vRP.tryWithdraw(parseInt(id),parseInt(money))
-        TriggerClientEvent("Notify", source, "Você removeu <b>$"..money.."</b> para o ID: <b>"..id..".</b>","Sucesso","Verde")
-        TriggerClientEvent("Notify", nplayer, "Você perdeu <b>$"..money.."</b>.","Se fodeu","Vermelho")
+            if parseInt(dindin) < parseInt(money) then
+                TriggerClientEvent("Notify",source,"O cidadão possui menos do que $<b>"..money..",00</b> no banco.","Atenção","Vermelho")            
+            else
+                vRP.setBankMoney(parseInt(id),parseInt(dindin)-parseInt(money))
+                TriggerClientEvent("Notify", source, "Você removeu <b>$"..money.."</b> do ID: <b>"..id..".</b>","Sucesso","Verde")
+                TriggerClientEvent("Notify", nplayer, "Você perdeu <b>$"..money.."</b>.","Se fodeu","Vermelho")
+            end
 
     else
         TriggerClientEvent("Notify",source,"Achou que ia ser fácil driblar triggando direto do client né safado ?","HAHAHA","Rosa")
@@ -168,3 +165,4 @@ function perm.checkPerm()
     local user_id = vRP.getUserId(source)
     return vRP.hasPermission(user_id,"admin.permissao")
 end
+
