@@ -1,0 +1,101 @@
+*{  margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+
+
+.container{
+    height: 700px;
+    width: 400px;
+    background-color:rgba(0,0,0,0.8);
+    border: 2px solid #e01646;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: block;
+    position: fixed;
+}
+
+.barrinha
+{
+    margin: 0 auto;
+    margin-top:40px;
+    color:white;
+    margin-left: 25%;
+}
+
+.texto{
+    font-family: Impact;
+    font-size: 16px;    
+}
+
+.header{
+    width: 398px;
+    height: 60px;
+    font-family: Impact;
+    font-size: 32px;  
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 10px 0px 0px;
+    background-color:  #e01646;
+    color: white;
+    line-height: 55px;
+}
+
+#buttonclose
+{
+    height: 40px;
+    width: 120px;
+    background-color: red;
+    color:white;
+    margin-left: 140px;
+    margin-top: 50px;
+    border-radius: 10px;
+    line-height: 38px;
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+      
+}
+
+.buttonremove
+{
+    height: 30px;
+    width: 60px;
+    background-color: red;
+    color:white;
+    margin-left: 5px;
+    border-radius: 10px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 5px;
+    display: block;
+    font-family: Impact;
+}
+
+.buttongive
+{
+    height: 30px;
+    width: 60px;
+    background-color: green;
+    color:white;
+    margin-right:5px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 5px;
+    display: block;
+    font-family: Impact;
+}
+
+#botoes
+{
+    height: 35px;
+    width: 140px;    
+    display: flex;
+}
+
